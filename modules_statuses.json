@@ -1,0 +1,12 @@
+{
+    "Auth": true,
+    "Event": true,
+    "Dashboard": true,
+    "Billing": true,
+    "Client": true,
+    "Invoice": true,
+    "Account": true,
+    "Administration": true,
+    "User": true,
+    "Timecard": true
+}

@@ -1,0 +1,70 @@
+select {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #336699}
+
+.cp {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: normal; color: #336699}
+
+.slogan {  font-family: "Times New Roman", Times, serif; font-size: 20px; color: #114183; margin-top: 10px; margin-bottom: 6px; padding-top: 10px; padding-bottom: 6px}
+
+.tpc {  font-family: Arial, Helvetica, sans-serif; font-weight: bold; color: #000066; font-size: 11px}
+
+.tpl {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold; color: #3464A8}
+
+.tpt {  font-family: Georgia, "Times New Roman", Times, serif; font-size: 11px; color: #336699 }
+
+.tpl2 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10.5px; font-weight: bold; color: #000099}
+
+.calendar { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: normal; color: #000099}
+
+.calendarbold { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bolder; color: #000066 }
+
+.calendarsmal { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; font-weight: bold; color: #FFFFFF}
+
+.calendarsmalbold { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; font-weight: bolder; color: #FFFFFF}
+
+.cpbk { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: normal; color: #000000}
+
+.email { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bolder; color: #666666}
+
+a {  color: #000066}
+
+.tabletitle {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bolder;
+	color: #FFFFFF;
+	background-color: #C7D9E7;
+
+}
+
+.tabledata { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bolder; color: #3D67A7}
+
+.tablesubdata { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #8D8D8D}
+
+.btn_1 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000066; background-color: #85ADD6; border-color: #B2CCE5 #336699 #336699 #B2CCE5; border-style: solid; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px}
+
+.welcome { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bolder; color: #000066 }
+
+.arialblu { font-family: Arial, Helvetica, sans-serif; font-weight: bold; color: #486AA1; font-size: 10pt}
+
+.ubody {
+	scrollbar-arrow-color:#FFFFFF;
+	scrollbar-base-color:#E8EFF5;
+	scrollbar-shadow-color:#B7CFE4;
+	scrollbar-face-color:#B7CFE4;
+	scrollbar-highlight-color:#6A8FAC;
+	scrollbar-darkshadow-color:#6A8FAC;
+	scrollbar-3dlight-color:#F3F7FA;
+	background-color : #FFFFFF;
+}
+
+A.linkevent:link {text-decoration: none}
+A.linkevent:visited {text-decoration: none}
+A.linkevent:active {text-decoration: none}
+A.linkevent:hover {text-decoration: none}
+
+.cp {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: normal;
+    color: #336699;
+}
+

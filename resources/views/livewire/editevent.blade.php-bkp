@@ -1,0 +1,651 @@
+<div>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* The modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Black background with transparency */
+        }
+
+        /* Modal content */
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 473px;
+            position: relative;
+        }
+
+        /* Close button (X) */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        /* Close button on hover */
+        .close:hover,
+        .close:focus {
+            color: black;
+        }
+
+        /* The form styles */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" height="34">
+        <tbody>
+            <tr>
+                <td valign="top" width="27"><img src="{{ asset('assets/images/cornerSmall.jpg') }}" width="25"
+                        height="30">
+                </td>
+                <td colspan="2" width="439">
+                    <table width="97%" border="0" cellspacing="0" cellpadding="0"
+                        background="{{ asset('assets/images/blueBarTab.jpg') }}">
+                        <tbody>
+                            <tr>
+                                <td height="12" width="67%">
+                                    <div align="left"><img src="{{ asset('assets/images/blueBarStart.jpg') }}"
+                                            width="36" height="15">
+                                        <!-- <img src="assets/images/eventsCalHdr.jpg"> -->
+                                    </div>
+                                </td>
+                                <td height="12" width="33%" align="right"><img
+                                        src="{{ asset('assets/images/blueBarTail.jpg') }}" width="144"
+                                        height="15">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td><img src="{{ asset('assets/images/clear.gif') }}" width="1" height="10"></td>
+            </tr>
+
+            <tr>
+                <td width="168" valign="bottom"><span class="cp"> <a href="{{route('event.index')}}"><img
+                                src="{{ asset('assets/images/backToCalendar.gif') }}" width="121" height="22"
+                                border="0"></a></span>
+                </td>
+                <td width="110">&nbsp;</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table width="100%" height="35" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td>
+                    <table width="520" border="0" cellspacing="0" cellpadding="6">
+                        <tbody>
+                            <tr>
+                                <td width="8"><img src="{{ asset('assets/images/clear.gif') }}" width="8"
+                                        height="1"></td>
+                                <td width="100%" class="frmToolHeader">EVENT ADMINISTRATION</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td width="20"><img src="{{ asset('assets/images/clear.gif') }}" width="20" height="1"></td>
+                <td width="100%">
+                    <table width="500" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td class="frmBorder"><img src="{{ asset('assets/images/clear.gif') }}" width="1"
+                                        height="1"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{{ asset('assets/images/clear.gif') }}" width="1" height="1">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                                        <tbody>
+                                            <tr>
+                                                <td class="frmHeader">EDIT</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table width="500" border="0" cellspacing="0" cellpadding="1">
+                        <tbody>
+                            <tr>
+                                <td class="frmBorder">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                                        <tbody>
+                                            <tr>
+                                                <td class="frmBackground">
+                                                    <form class="changeForm" wire:submit.prevent="updateEvent">
+                                                        <table width="100%" border="0" cellspacing="1"
+                                                            cellpadding="3">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td colspan="2" class="frmRequired">
+                                                                        *Required Fields</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="175" class="frmDescriptionBold">
+                                                                        *Start Date/TIme:</td>
+                                                                    <td class="frmInput">
+                                                                        <input type="datetime-local"
+                                                                            wire:model="start_date" class="textbox"
+                                                                            style="width:23">
+                                                                        @error('start_date')
+                                                                            <span class="text-red-500">
+                                                                                {{ $message }}
+                                                                            </span>
+                                                                        @enderror
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="175" class="frmDescriptionBold">
+                                                                        *End Date/TIme:</td>
+                                                                    <td class="frmInput">
+                                                                        <input type="datetime-local"
+                                                                            wire:model="end_date" class="textbox"
+                                                                            style="width:23">
+                                                                        @error('end_date')
+                                                                            <span class="text-red-500">
+                                                                                {{ $message }}
+                                                                            </span>
+                                                                        @enderror
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="175" class="frmDescriptionBold">
+                                                                        *Event:</td>
+                                                                    <td class="frmInput">
+                                                                        <input type="text" wire:model="title"
+                                                                            class="textbox" style="width:306">
+                                                                        @error('title')
+                                                                            <span class="text-red-500">
+                                                                                {{ $message }}
+                                                                            </span>
+                                                                        @enderror
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="175" class="frmDescriptionBold">
+                                                                        Details:</td>
+                                                                    <td class="frmInput">
+                                                                        <textarea wire:model="description" class="textfield" cols="42" rows="6" style="width:306"></textarea>
+                                                                        @error('description')
+                                                                            <span class="text-red-500">
+                                                                                {{ $message }}
+                                                                            </span>
+                                                                        @enderror
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="175" class="frmDescriptionBold">
+                                                                        Importance:</td>
+                                                                    <td class="frmInput">
+                                                                        <select wire:model="importance"
+                                                                            class="inputstyle">
+                                                                            <option value="0">Normal</option>
+                                                                            <option value="1">Medium</option>
+                                                                            <option value="2">High</option>
+                                                                        </select>
+                                                                        @error('importance')
+                                                                            <span class="text-red-500">
+                                                                                {{ $message }}
+                                                                            </span>
+                                                                        @enderror
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="175" class="frmDescriptionBold">
+                                                                        Associated with Client:<br><span
+                                                                            class="frmDescription">(if
+                                                                            applicable)</span></td>
+                                                                    <td class="frmInput">
+                                                                        <select wire:model="clientId"
+                                                                            class="inputstyle">
+                                                                            <option value="">Select</option>
+                                                                            @foreach ($clientList as $client)
+                                                                                <option value="{{ $client['id'] }}">
+                                                                                    {{ $client['first_name'] }}
+                                                                                    {{ $client['last_name'] }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @error('clientId')
+                                                                            <span class="text-red-500">
+                                                                                {{ $message }}
+                                                                            </span>
+                                                                        @enderror
+                                                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="image"
+                                                                            src="{{ asset('assets/images/btnAddNewClient.gif') }}"
+                                                                            border="0" value="Add"
+                                                                            id="openModalBtn"
+                                                                            onclick="event.preventDefault();">
+                                                                            
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td width="175" class="frmDescriptionBold">
+                                                                        Assigned To:<br><span
+                                                                            class="frmDescription">(Hold
+                                                                            CTRL
+                                                                            key to select multiple
+                                                                            people)</span></td>
+                                                                    <td class="frmInput">
+                                                                        <select wire:model="assignedTo"
+                                                                            class="inputstyle" multiple="multiple"
+                                                                            size="4">
+                                                                            <option value="0">Select</option>
+                                                                            @foreach ($userList as $user)
+                                                                                <option value="{{ $user['id'] }}">
+                                                                                    {{ $user['first_name'] }}
+                                                                                    {{ $user['last_name'] }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="175" class="frmDescriptionBold">
+                                                                        <input type="image" name="addMoreReminders"
+                                                                            value="Add More Reminders" alt="Add More Reminders"
+                                                                            src="{{ asset('assets/images/btnAddMoreReminders.gif') }}">
+                                                                    </td>
+                                                                    <td class="frmInput">&nbsp;</td>
+                                                                </tr>
+
+                                                                @for ($count = 0; $count < 3; $count++)
+
+
+                                                                    <tr>
+                                                                        <td class="frmDescriptionBold" "="" colspan="
+                                                                    2">Reminder
+                                                                        {{ $count + 1 }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                                            class="frmDescription">(To delete
+                                                                            Reminder, remove Days Prior and
+                                                                            Title)</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="175" class="frmDescriptionBold"
+                                                                        align="right">Days Prior:</td>
+                                                                    <td class="frmInput">
+                                                                        <input type="hidden" wire:model="reminderId.{{ $count }}">
+                                                                        <select wire:model="daysPrior.{{ $count }}"
+                                                                            class="inputstyle">
+                                                                            <option value=""></option>
+  @for ($i=1; $i < 31; $i++)
+                                                                            <option value="{{ $i }}">
+                                                                                {{ $i }}
+                                                                            </option>
+                                                                @endfor
+                                                                <option value="45">45</option>
+                                                                <option value="90">90</option>
+                                                                <option value="90">180</option>
+
+                                                                </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="175" class="frmDescriptionBold" align="right">Title:
+                                                </td>
+                                                <td class="frmInput">
+                                                    <input type="text"
+                                                        wire:model="reminder_title.{{ $count }}"
+                                                        value="" class="textbox" style="width:306">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="175" class="frmDescriptionBold" align="right">Details:
+                                                </td>
+                                                <td class="frmInput">
+                                                    <textarea wire:model="reminder_details.{{ $count }}" class="textfield" cols="42" rows="6"
+                                                        style="width:306"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="175" class="frmDescriptionBold" align="right">Assigned
+                                                    To:<br><span class="frmDescription">(Hold CTRL
+                                                        key to select multiple
+                                                        people)</span></td>
+                                                <td class="frmInput">
+                                                    <select wire:model="reminderAssignedTo.{{ $count }}"
+                                                        class="inputstyle" multiple="multiple" size="4">
+                                                        <option value="0">Select</option>
+                                                        @foreach ($userList as $user)
+                                                            <option value="{{ $user['id'] }}">
+                                                                {{ $user['first_name'] }}
+                                                                {{ $user['last_name'] }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            @endfor
+
+                                            
+                                            <tr>
+                                                <td width="175" class="frmDescriptionBold">
+                                                </td>
+                                                <td align="right" class="frmInput">
+                                                    <input type="image"
+                                                        src="{{ asset('assets/images/btnSave.gif') }}" name="Save"
+                                                        value="Add" align="middle" alt="Save">
+                                                    {{-- &nbsp;<input type="image"
+                                                        src="{{ asset('assets/images/btnCancel.gif') }}"
+                                                        name="Cancel" value="Cancel" align="middle" alt="Cancel"> --}}
+                                                </td>
+                                            </tr>
+                                            <tr align="center">
+                                                <td colspan="2" class="frmStatus">&nbsp;
+                                                    @if (session('error'))
+                                                        <div class="alert alert-danger">
+                                                            {{ session('error') }}
+                                                        </div>
+                                                    @endif
+                                                    @if (session('success'))
+                                                        <div class="alert alert-success">
+                                                            {{ session('success') }}
+                                                        </div>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr> </tr>
+                                        </tbody>
+                                    </table>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td height="25"></td>
+            </tr>
+            <tr>
+                <td width="100%" class="frmDescriptionBold">
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- The Modal -->
+    <div id="signupModal" class="modal" 
+    @if($modalVisible)
+        style="display: block;"
+    @else
+        style="display: none;"
+    @endif
+    @click.away="@this.closeModal()">
+        <div class="modal-content">
+            <span class="close" id="closeModalBtn" @click="$wire.closeModal()">&times;</span>
+            <h2>Add Client</h2>
+            <form class="changeForm" name="changeForm" wire:submit.prevent="submitClient">
+                <table width="100%" border="0" cellspacing="1" cellpadding="3">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="frmRequired">
+                                *Required Fields</td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                                *First Name:</td>
+                            <td class="frmInput">
+                                <input type="text" wire:model="first_name" value="" class="textbox"
+                                    style="width:306">
+                                @error('first_name')
+                                    <span class="text-red-500">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                                *Last Name:</td>
+                            <td class="frmInput">
+                                <input type="text" wire:model="last_name" value="" class="textbox"
+                                    style="width:306">
+                                @error('last_name')
+                                    <span class="text-red-500">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                                *Address:</td>
+                            <td class="frmInput">
+                                <input type="text" wire:model="address" value="" class="textbox"
+                                    style="width:306">
+                                @error('address')
+                                    <span class="text-red-500">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                                *City:</td>
+                            <td class="frmInput">
+                                <input type="text" wire:model="city" value="" class="textbox"
+                                    style="width:306">
+                                @error('city')
+                                    <span class="text-red-500">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                                *State:</td>
+                            <td class="frmInput">
+                                <select wire:model="stateId" class="inputstyle" style="width:50">
+                                    <option value="">Select</option>
+
+                                    @foreach ($stateList as $item)
+                                        <option value="{{ $item['id'] }}">
+                                            {{ $item['title'] }}</option>
+                                    @endforeach
+                                </select>
+                                @error('stateId')
+                                    <span class="text-red-500">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                                *Zipcode:</td>
+                            <td class="frmInput">
+                                <input type="number" wire:model="zipcode" value="" class="textbox"
+                                    style="width:100">
+                                @error('zipcode')
+                                    <span class="text-red-500">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                                Attorney Hourly Rate:</td>
+                            <td class="frmInput">
+                                $ <input type="number" step="any" wire:model="attorney_rate" value=""
+                                    class="textbox" style="width:50">
+                                @error('attorney_rate')
+                                    <span class="text-red-500">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                                Legal Secretary Hourly Rate:</td>
+                            <td class="frmInput">
+                                $ <input type="number" step="any" wire:model="legal_secretary_rate"
+                                    value="" class="textbox" style="width:50">
+                                @error('legal_secretary_rate')
+                                    <span class="text-red-500">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                                Legal Document Assistant Hourly Rate:
+                            </td>
+                            <td class="frmInput">
+                                $ <input type="number" step="any" wire:model="legal_assistant_rate"
+                                    value="" class="textbox" style="width:50">
+                                @error('legal_assistant_rate')
+                                    <span class="text-red-500">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                                Initial Balance:<br><span class="frmDescription">(if
+                                    applicable)</span></td>
+                            <td class="frmInput">
+                                $ <input type="number" step="any" wire:model="initial_balance" value=""
+                                    class="textbox" style="width:50">
+                                @error('initial_balance')
+                                    <span class="text-red-500">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                                Client Notes:</td>
+                            <td class="frmInput">
+                                <textarea wire:model="notes" class="textfield" cols="42" rows="6" style="width:306"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="175" class="frmDescriptionBold">
+                            </td>
+                            <td align="right" class="frmInput"> <input type="image"
+                                    src="{{ asset('assets/images/btnAdd.gif') }}" name="Add" value="Add"
+                                    align="middle" alt="Add">
+                                &nbsp;<input type="image" src="{{ asset('assets/images/btnCancel.gif') }}"
+                                    name="Cancel" value="Cancel" wire:click="cancelClient" align="middle" alt="Cancel">
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td colspan="2" class="frmStatus">&nbsp;
+                                @if (session('error'))
+                                    <div class="alert alert-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr> </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        document.getElementById("openModalBtn").onclick = function(event) {
+        event.preventDefault(); // Prevent the page from refreshing
+        @this.openModal(); // Open the modal using Livewire
+    }
+
+    document.getElementById("closeModalBtn").onclick = function() {
+        @this.closeModal(); // Close the modal using Livewire
+    }
+
+    // Optional: Prevent closing modal by clicking outside
+    window.onclick = function(event) {
+        if (event.target === document.getElementById("signupModal")) {
+            event.stopPropagation(); // Prevent closing the modal if clicked outside
+        }
+    }
+    </script>
+</div>
